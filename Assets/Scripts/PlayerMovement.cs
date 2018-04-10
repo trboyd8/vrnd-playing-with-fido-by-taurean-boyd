@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public GameObject TeleportObject;
     public GameObject Player;
+    public GameObject Dog;
 
     // Use this for initialization
     void Start ()
@@ -74,6 +75,10 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Player.transform.position = new Vector3(teleportLocation.x, Player.transform.position.y, teleportLocation.z);
                 canTeleport = false;
+
+                // Trigger dog to follow
+                DogMovement dogMovement = Dog.GetComponent<DogMovement>();
+                dogMovement.Navigate(Player.transform);
             }
         }
 	}
