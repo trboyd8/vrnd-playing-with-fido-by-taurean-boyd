@@ -26,6 +26,7 @@ public class DogController : MonoBehaviour {
         animationToBoolMapping.Add("Dead", "IsDead");
         animationToBoolMapping.Add("Walk", "IsWalking");
         animationToBoolMapping.Add("Idle", "IsIdle");
+        animationToBoolMapping.Add("Petting", "IsPetting");
     }
 
     void Update()
@@ -81,13 +82,21 @@ public class DogController : MonoBehaviour {
         }
     }
 
-    //public void Pet()
-    //{
-    //    if (!isWalking)
-    //    {
-    //        dogAnimator.Play("BeingPet");
-    //    }
-    //}
+    public void BeginPetting()
+    {
+        if (!currentAnimation.Equals("Walk") && !currentAnimation.Equals("Petting"))
+        {
+            SwitchAnimation("Petting");
+        }
+    }
+
+    public void EndPetting()
+    {
+        if (currentAnimation.Equals("Petting"))
+        {
+            SwitchAnimation("Idle");
+        }
+    }
 
     public void Navigate(Transform destination)
     {
@@ -121,13 +130,13 @@ public class DogController : MonoBehaviour {
         currentAnimation = newAnimation;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Pickup"))
-        {
-            // Pick up object
-                // Make dog parent of object
-                // Set to mouth position
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Pickup"))
+    //    {
+    //        // Pick up object
+    //            // Make dog parent of object
+    //            // Set to mouth position
+    //    }
+    //}
 }

@@ -7,7 +7,6 @@ public class ObjectInteraction : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("You hit an object");
         if (other.CompareTag("Grabbable"))
         {
             if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, thisController))
@@ -22,7 +21,14 @@ public class ObjectInteraction : MonoBehaviour {
 
         if (other.CompareTag("Dog"))
         {
-            // Start Pet Animation
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, thisController))
+            {
+                other.GetComponent<DogController>().BeginPetting();
+            }
+            else if (!OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, thisController))
+            {
+                other.GetComponent<DogController>().EndPetting();
+            }
         }
     }
 
@@ -30,7 +36,7 @@ public class ObjectInteraction : MonoBehaviour {
     {
         if (other.CompareTag("Dog"))
         {
-            // Stop Pet Animation
+            other.GetComponent<DogController>().EndPetting();
         }
     }
 
