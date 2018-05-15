@@ -22,7 +22,15 @@ public class ObjectInteraction : MonoBehaviour {
 
         if (other.CompareTag("Dog"))
         {
-            // Implement Petting
+            // Start Pet Animation
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Dog"))
+        {
+            // Stop Pet Animation
         }
     }
 

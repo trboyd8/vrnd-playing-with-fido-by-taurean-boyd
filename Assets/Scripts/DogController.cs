@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,110 +8,117 @@ public class DogController : MonoBehaviour {
     private NavMeshAgent agent;
     private Animator dogAnimator;
     private LoveMeter loveMeter;
-    private bool isFetching;
-    private bool isFollowing;
-    private bool isWalking;
     private Transform originalPosition;
+    private string currentAnimation;
+    private Dictionary<string, string> animationToBoolMapping;
 
 	// Use this for initialization
 	void Start () {
         agent = this.GetComponent<NavMeshAgent>();
         dogAnimator = this.GetComponentInChildren<Animator>();
         loveMeter = this.GetComponentInChildren<LoveMeter>();
-        isFetching = false;
-        isWalking = false;
+        currentAnimation = "Idle";
+
+        animationToBoolMapping = new Dictionary<string, string>();
+        animationToBoolMapping.Add("Speak", "IsSpeaking");
+        animationToBoolMapping.Add("Sit", "IsSitting");
+        animationToBoolMapping.Add("Lay", "IsLaying");
+        animationToBoolMapping.Add("Dead", "IsDead");
+        animationToBoolMapping.Add("Walk", "IsWalking");
+        animationToBoolMapping.Add("Idle", "IsIdle");
     }
 
-    private void Update()
+    void Update()
     {
+        // If we're done walking, go back to idle
         if (agent.velocity != Vector3.zero)
         {
-            isWalking = true;
+            SwitchAnimation("Walk");
         }
-        else
+        else if (currentAnimation.Equals("Walk"))
         {
-            isWalking = false;
+            SwitchAnimation("Idle");
         }
-        
-        // TODO: Change this so you don't have to do it every frame
-        dogAnimator.SetBool("IsWalking", isWalking);
     }
-
-    // TODO: When another animation is called, get the current animation's "closing animation loop" and play it. Then play the new animation?
 
     public void Speak()
     {
-        if (!isWalking)
+        if (!currentAnimation.Equals("Walk"))
         {
-            dogAnimator.Play("Speak");
+            SwitchAnimation("Speak");
         }
     }
 
     public void Dead()
     {
-        if (!isWalking)
+        if (!currentAnimation.Equals("Walk"))
         {
-            dogAnimator.Play("Dead");
+            SwitchAnimation("Dead");
         }
     }
 
     public void Sit()
     {
-        if (!isWalking)
+        if (!currentAnimation.Equals("Walk"))
         {
-            dogAnimator.Play("IdleToSit");
+            SwitchAnimation("Sit");
         }
     }
 
     public void Lay()
     {
-        if (!isWalking)
+        if (!currentAnimation.Equals("Walk"))
         {
-            dogAnimator.Play("IdleToLay");
+            SwitchAnimation("Lay");
+        }
+    }
+    
+    public void Stop()
+    {
+        if (!currentAnimation.Equals("Walk"))
+        {
+            SwitchAnimation("Idle");
         }
     }
 
-    public void Come()
-    {
-        // Trigger a state to tell the dog to walk toward the player
-    }
-
-    public void Follow()
-    {
-        isFollowing = true;
-        // Set the dog to automatically follow the player
-    }
-
-    public void Stop()
-    {
-        isFollowing = false;
-        // Set the dog to stop following the player
-    }
+    //public void Pet()
+    //{
+    //    if (!isWalking)
+    //    {
+    //        dogAnimator.Play("BeingPet");
+    //    }
+    //}
 
     public void Navigate(Transform destination)
     {
-        // TODO: Make the rotation slower?
-        //this.transform.LookAt(destination);
+        SwitchAnimation("Walk");
         Vector3 destinationVector = destination.transform.position;
         agent.SetDestination(destinationVector);
     }
 
-    public void BeginFetch(GameObject objectToFetch)
-    {
-        if (!this.isFetching)
-        {
-            originalPosition = this.transform;
-            this.Navigate(objectToFetch.transform);
-        }
-    }
+    //public void BeginFetch(GameObject objectToFetch)
+    //{
+    //    if (!this.isFetching)
+    //    {
+    //        originalPosition = this.transform;
+    //        this.Navigate(objectToFetch.transform);
+    //    }
+    //}
 
-    public void EndFetch()
+    //public void EndFetch()
+    //{
+    //    if (this.isFetching)
+    //    {
+    //        this.Navigate(originalPosition);
+    //        this.isFetching = false;
+    //    }
+    //}
+
+    private void SwitchAnimation(string newAnimation)
     {
-        if (this.isFetching)
-        {
-            this.Navigate(originalPosition);
-            this.isFetching = false;
-        }
+        dogAnimator.SetBool(animationToBoolMapping[currentAnimation], false);
+        dogAnimator.SetBool(animationToBoolMapping[newAnimation], true);
+        currentAnimation = newAnimation;
     }
 
     private void OnTriggerEnter(Collider other)

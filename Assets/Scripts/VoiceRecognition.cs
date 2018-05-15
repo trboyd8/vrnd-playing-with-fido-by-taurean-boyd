@@ -15,8 +15,6 @@ public class VoiceRecognition : MonoBehaviour {
             "Dead",
             "Lay",
             "Sit",
-            "Come",
-            "Follow",
             "Stop"
         };
         recognizer = new KeywordRecognizer(keywords);
@@ -39,12 +37,6 @@ public class VoiceRecognition : MonoBehaviour {
                 break;
             case "Sit":
                 dogController.Sit();
-                break;
-            case "Come":
-                dogController.Come();
-                break;
-            case "Follow":
-                dogController.Follow();
                 break;
             case "Stop":
                 dogController.Stop();
