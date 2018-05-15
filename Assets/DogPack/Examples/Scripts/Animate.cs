@@ -219,6 +219,6 @@ public class Animate : MonoBehaviour {
 		GameObject ButtonToReset = GameObject.Find(CurrentButtonPressed);
 		ButtonToReset.GetComponentInChildren<Text> ().text = CurrentButtonPressed;
 		print ("change button name and it is now " + ButtonToReset.GetComponentInChildren<Text> ().text);
-		ButtonToReset.GetComponentInChildren<ChangeButtonText> ().ValuetoGet = 0;
+		//ButtonToReset.GetComponentInChildren<ChangeButtonText> ().ValuetoGet = 0;
 	}
 }
