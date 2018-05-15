@@ -77,8 +77,8 @@ public class PlayerMovement : MonoBehaviour {
                 canTeleport = false;
 
                 // Trigger dog to follow
-                DogMovement dogMovement = Dog.GetComponent<DogMovement>();
-                dogMovement.Navigate(Player.transform);
+                DogController dogController = Dog.GetComponent<DogController>();
+                dogController.Navigate(Player.transform);
             }
         }
 	}
