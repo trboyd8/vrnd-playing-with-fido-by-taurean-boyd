@@ -26,8 +26,6 @@ public class VoiceRecognition : MonoBehaviour {
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
-        Debug.Log(args.text);
-
         switch (args.text)
         {
             case "Speak":

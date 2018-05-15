@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class DogController : MonoBehaviour {
@@ -18,7 +19,6 @@ public class DogController : MonoBehaviour {
         loveMeter = this.GetComponentInChildren<LoveMeter>();
         isFetching = false;
         isWalking = false;
-
     }
 
     private void Update()
@@ -40,7 +40,7 @@ public class DogController : MonoBehaviour {
     {
         if (!isWalking)
         {
-            dogAnimator.Play("Bark");
+            dogAnimator.Play("Speak");
         }
     }
 
@@ -56,7 +56,7 @@ public class DogController : MonoBehaviour {
     {
         if (!isWalking)
         {
-            dogAnimator.Play("Sit");
+            dogAnimator.Play("IdleToSit");
         }
     }
 
@@ -64,7 +64,7 @@ public class DogController : MonoBehaviour {
     {
         if (!isWalking)
         {
-            dogAnimator.Play("Lay");
+            dogAnimator.Play("IdleToLay");
         }
     }
 
