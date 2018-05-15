@@ -36,6 +36,8 @@ public class DogController : MonoBehaviour {
         dogAnimator.SetBool("IsWalking", isWalking);
     }
 
+    // TODO: When another animation is called, get the current animation's "closing animation loop" and play it. Then play the new animation?
+
     public void Speak()
     {
         if (!isWalking)
