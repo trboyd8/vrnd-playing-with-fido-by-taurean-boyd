@@ -5988,7 +5988,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1373941878}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 74f7a3190ddda6b48bbee866ad1e3c9b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -7700,6 +7700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e609881ddafbb45926ffee8fb9b876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 1373941884}
 --- !u!65 &1696846767
 BoxCollider:
   m_ObjectHideFlags: 0
