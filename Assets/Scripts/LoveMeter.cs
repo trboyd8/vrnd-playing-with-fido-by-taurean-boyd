@@ -7,7 +7,7 @@ public class LoveMeter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.slider = this.GetComponent<Slider>();
+        this.slider = this.GetComponentInChildren<Slider>();
 	}
 
     public void UpdateLove(float amount)

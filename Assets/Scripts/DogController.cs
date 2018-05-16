@@ -11,6 +11,9 @@ public class DogController : MonoBehaviour {
     private Transform originalPosition;
     private string currentAnimation;
     private Dictionary<string, string> animationToBoolMapping;
+    private bool isFetching;
+    private GameObject objectToFetch;
+    private float originalStoppingDistance;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +21,8 @@ public class DogController : MonoBehaviour {
         dogAnimator = this.GetComponentInChildren<Animator>();
         loveMeter = this.GetComponentInChildren<LoveMeter>();
         currentAnimation = "Idle";
+        isFetching = false;
+        originalStoppingDistance = agent.stoppingDistance;
 
         animationToBoolMapping = new Dictionary<string, string>();
         animationToBoolMapping.Add("Speak", "IsSpeaking");
@@ -40,6 +45,12 @@ public class DogController : MonoBehaviour {
         {
             SwitchAnimation("Idle");
         }
+
+        if (isFetching)
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, objectToFetch.transform.position, 2.0f * Time.deltaTime, 0.0f));
+            transform.position = Vector3.MoveTowards(transform.position, objectToFetch.transform.position, 2.0f * Time.deltaTime);
+        }
     }
 
     public void Speak()
@@ -47,6 +58,7 @@ public class DogController : MonoBehaviour {
         if (!currentAnimation.Equals("Walk"))
         {
             SwitchAnimation("Speak");
+            loveMeter.UpdateLove(0.05f);
         }
     }
 
@@ -55,6 +67,7 @@ public class DogController : MonoBehaviour {
         if (!currentAnimation.Equals("Walk"))
         {
             SwitchAnimation("Dead");
+            loveMeter.UpdateLove(0.05f);
         }
     }
 
@@ -63,6 +76,7 @@ public class DogController : MonoBehaviour {
         if (!currentAnimation.Equals("Walk"))
         {
             SwitchAnimation("Sit");
+            loveMeter.UpdateLove(0.05f);
         }
     }
 
@@ -71,6 +85,7 @@ public class DogController : MonoBehaviour {
         if (!currentAnimation.Equals("Walk"))
         {
             SwitchAnimation("Lay");
+            loveMeter.UpdateLove(0.05f);
         }
     }
     
@@ -87,6 +102,7 @@ public class DogController : MonoBehaviour {
         if (!currentAnimation.Equals("Walk") && !currentAnimation.Equals("Petting"))
         {
             SwitchAnimation("Petting");
+            loveMeter.UpdateLove(0.1f);
         }
     }
 
@@ -98,21 +114,22 @@ public class DogController : MonoBehaviour {
         }
     }
 
-    public void Navigate(Transform destination)
+    public void Navigate(Vector3 position)
     {
         SwitchAnimation("Walk");
-        Vector3 destinationVector = destination.transform.position;
-        agent.SetDestination(destinationVector);
+        agent.SetDestination(position);
     }
 
-    //public void BeginFetch(GameObject objectToFetch)
-    //{
-    //    if (!this.isFetching)
-    //    {
-    //        originalPosition = this.transform;
-    //        this.Navigate(objectToFetch.transform);
-    //    }
-    //}
+    public void BeginFetch(GameObject fetchableObject)
+    {
+        if (!this.isFetching)
+        {
+            this.isFetching = true;
+            originalPosition = this.transform;
+            SwitchAnimation("Walk");
+            objectToFetch = fetchableObject;
+        }
+    }
 
     //public void EndFetch()
     //{

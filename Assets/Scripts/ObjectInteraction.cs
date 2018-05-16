@@ -7,6 +7,7 @@ public class ObjectInteraction : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
+        Debug.Log("You hit something.");
         if (other.CompareTag("Grabbable"))
         {
             if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, thisController))
@@ -49,6 +50,7 @@ public class ObjectInteraction : MonoBehaviour {
     private void ThrowObject(Collider other)
     {
         other.transform.SetParent(null);
+        other.GetComponent<Fetchable>().HasBeenThrown = true;
         Rigidbody rigidbody = other.GetComponent<Rigidbody>();
         rigidbody.isKinematic = false;
         rigidbody.velocity = OVRInput.GetLocalControllerVelocity(thisController) * throwForce;

@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour {
             laser.gameObject.SetActive(true);
             TeleportObject.SetActive(true);
             laser.SetPosition(0, gameObject.transform.position);
+            laser.SetPosition(1, gameObject.transform.position + transform.forward * laserLength);
+            TeleportObject.transform.position = gameObject.transform.position + transform.forward * laserLength;
 
             // Test to see if we can teleport forward
             RaycastHit hit;
@@ -78,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 
                 // Trigger dog to follow
                 DogController dogController = Dog.GetComponent<DogController>();
-                dogController.Navigate(Player.transform);
+                dogController.Navigate(Player.transform.position);
             }
         }
 	}
