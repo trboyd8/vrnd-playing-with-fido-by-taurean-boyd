@@ -7700,7 +7700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e609881ddafbb45926ffee8fb9b876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1373941884}
+  player: {fileID: 1122811456}
 --- !u!65 &1696846767
 BoxCollider:
   m_ObjectHideFlags: 0

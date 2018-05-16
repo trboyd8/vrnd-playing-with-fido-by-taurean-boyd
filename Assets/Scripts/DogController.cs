@@ -7,14 +7,13 @@ public class DogController : MonoBehaviour {
     private NavMeshAgent agent;
     private Animator dogAnimator;
     private LoveMeter loveMeter;
-    private Vector3 originalPosition;
     private string currentAnimation;
     private Dictionary<string, string> animationToBoolMapping;
     private bool isFetching;
+    private bool isReturning;
     private GameObject objectToFetch;
     private float originalStoppingDistance;
-
-    public Fetchable ball;
+    public GameObject player;
 
 	// Use this for initialization
 	void Start () {
@@ -45,13 +44,13 @@ public class DogController : MonoBehaviour {
         else if (currentAnimation.Equals("Walk"))
         {
             SwitchAnimation("Idle");
-        }
-
-        if (isFetching)
-        {
-            transform.LookAt(ball.gameObject.transform);
-            //transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, ball.gameObject.transform.position, 260.0f * Time.deltaTime, 0.0f));
-            transform.position = Vector3.MoveTowards(transform.position, ball.gameObject.transform.position, 2.0f * Time.deltaTime);
+            if (isReturning)
+            {
+                objectToFetch.transform.SetParent(null);
+                objectToFetch.GetComponent<Rigidbody>().isKinematic = false;
+                isReturning = false;
+                loveMeter.UpdateLove(0.1f);
+            }
         }
     }
 
@@ -118,11 +117,8 @@ public class DogController : MonoBehaviour {
 
     public void Navigate(Vector3 position)
     {
-        if (!isFetching)
-        {
-            SwitchAnimation("Walk");
-            agent.SetDestination(position);
-        }
+        SwitchAnimation("Walk");
+        agent.SetDestination(position);
     }
 
     public void BeginFetch(GameObject fetchableObject)
@@ -130,11 +126,13 @@ public class DogController : MonoBehaviour {
         if (!this.isFetching)
         {
             this.isFetching = true;
-            originalPosition = gameObject.transform.position;
             SwitchAnimation("Walk");
-            agent.updatePosition = false;
-            agent.updateRotation = false;
-            //objectToFetch = fetchableObject;
+            objectToFetch = fetchableObject;
+            agent.stoppingDistance = 0.2f;
+            this.Navigate(objectToFetch.transform.position);
+            objectToFetch.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            objectToFetch.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            objectToFetch.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
@@ -142,12 +140,10 @@ public class DogController : MonoBehaviour {
     {
         if (this.isFetching)
         {
-            Debug.Log("Ending fetching.");
-            agent.nextPosition = transform.position;
-            agent.updatePosition = true;
-            agent.updateRotation = true;
-            this.Navigate(originalPosition);
+            agent.stoppingDistance = originalStoppingDistance;
+            this.Navigate(player.transform.position);
             this.isFetching = false;
+            this.isReturning = true;
         }
     }
 
@@ -162,14 +158,11 @@ public class DogController : MonoBehaviour {
     {
         if (other.CompareTag("Grabbable"))
         {
-            if (this.isFetching)
+            if (this.isFetching && !this.isReturning)
             {
                 this.EndFetch();
+                other.gameObject.transform.SetParent(this.transform);
             }
-            
-            // Pick up object
-            // Make dog parent of object
-            // Set to mouth position
         }
     }
 }

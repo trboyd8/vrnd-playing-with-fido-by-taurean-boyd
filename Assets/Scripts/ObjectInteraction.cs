@@ -7,7 +7,6 @@ public class ObjectInteraction : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("You hit something.");
         if (other.CompareTag("Grabbable"))
         {
             if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, thisController))
