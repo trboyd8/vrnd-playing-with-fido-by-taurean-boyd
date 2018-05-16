@@ -6,19 +6,23 @@ public class DogController : MonoBehaviour {
 
     private NavMeshAgent agent;
     private Animator dogAnimator;
+    private AudioSource audioSource;
     private LoveMeter loveMeter;
-    private string currentAnimation;
+    private GameObject objectToFetch;
+    public GameObject player;
     private Dictionary<string, string> animationToBoolMapping;
+    private string currentAnimation;
     private bool isFetching;
     private bool isReturning;
-    private GameObject objectToFetch;
+
     private float originalStoppingDistance;
-    public GameObject player;
+
 
 	// Use this for initialization
 	void Start () {
         agent = this.GetComponent<NavMeshAgent>();
         dogAnimator = this.GetComponentInChildren<Animator>();
+        audioSource = this.GetComponent<AudioSource>();
         loveMeter = this.GetComponentInChildren<LoveMeter>();
         currentAnimation = "Idle";
         isFetching = false;
@@ -58,6 +62,7 @@ public class DogController : MonoBehaviour {
     {
         if (!currentAnimation.Equals("Walk"))
         {
+            audioSource.Play();
             SwitchAnimation("Speak");
             loveMeter.UpdateLove(0.05f);
         }
@@ -149,6 +154,11 @@ public class DogController : MonoBehaviour {
 
     private void SwitchAnimation(string newAnimation)
     {
+        if (currentAnimation == "Speak")
+        {
+            audioSource.Stop();
+        }
+
         dogAnimator.SetBool(animationToBoolMapping[currentAnimation], false);
         dogAnimator.SetBool(animationToBoolMapping[newAnimation], true);
         currentAnimation = newAnimation;
