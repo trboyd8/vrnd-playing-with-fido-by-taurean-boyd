@@ -1,7 +1,10 @@
 # vrnd-playing-with-fido-by-taurean-boyd
 The final project for the Udacity VR Nanodegree.
 
-Assets Used:
+## Description
+In this experience, the player will get to play with their new dog Fido in their backyard. The goal is for the player to get Fido to love him/her by interacting with him. The player will be able to do things like: pet Fido, play fetch, and issue voice commands. Once the Fido fully loves the player, there will be a celebration. This experience is supposed to be a joyful experience.
+
+## Assets Used:
  - Puppy Bark Sound Clip: http://soundbible.com/393-Puppy-Dog-Barking.html
  - Dog Model and Animations: https://assetstore.unity.com/packages/3d/characters/animals/dog-package-71282
  - Soccer Ball: https://assetstore.unity.com/packages/3d/low-polygon-soccer-ball-84382
@@ -14,6 +17,6 @@ Assets Used:
  - Lawn Mower by Mike Koenig: http://soundbible.com/3-Lawn-Mower-Cutoff-Sound-.html
  - Particle Effects: https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-109565
 
-Licenses for Various Assets:
+## Licenses for Various Assets:
  - https://creativecommons.org/licenses/sampling+/1.0/
  - https://creativecommons.org/licenses/by/3.0/us/
