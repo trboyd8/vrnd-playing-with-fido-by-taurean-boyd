@@ -45,32 +45,34 @@ public class DogController : MonoBehaviour {
 
     void Update()
     {
-        // If we're done walking, go back to idle
-        if (agent.velocity != Vector3.zero)
-        {
-            SwitchAnimation("Walk");
-        }
-        else if (currentAnimation.Equals("Walk"))
-        {
-            SwitchAnimation("Idle");
-            if (isReturning)
-            {
-                objectToFetch.transform.SetParent(null);
-                objectToFetch.GetComponent<Rigidbody>().isKinematic = false;
-                isReturning = false;
-                loveMeter.UpdateLove(0.1f);
-            }
-        }
-
         if (isDancing)
         {
             transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+        }
+        else
+        {
+            // If we're done walking, go back to idle
+            if (agent.velocity != Vector3.zero)
+            {
+                SwitchAnimation("Walk");
+            }
+            else if (currentAnimation.Equals("Walk"))
+            {
+                SwitchAnimation("Idle");
+                if (isReturning)
+                {
+                    objectToFetch.transform.SetParent(null);
+                    objectToFetch.GetComponent<Rigidbody>().isKinematic = false;
+                    isReturning = false;
+                    loveMeter.UpdateLove(0.1f);
+                }
+            }
         }
     }
 
     public void Speak()
     {
-        if (!currentAnimation.Equals("Walk"))
+        if (!currentAnimation.Equals("Walk") && !isDancing)
         {
             audioSource.Play();
             SwitchAnimation("Speak");
@@ -80,7 +82,7 @@ public class DogController : MonoBehaviour {
 
     public void Dead()
     {
-        if (!currentAnimation.Equals("Walk"))
+        if (!currentAnimation.Equals("Walk") && !isDancing)
         {
             SwitchAnimation("Dead");
             loveMeter.UpdateLove(0.05f);
@@ -89,7 +91,7 @@ public class DogController : MonoBehaviour {
 
     public void Sit()
     {
-        if (!currentAnimation.Equals("Walk"))
+        if (!currentAnimation.Equals("Walk") && !isDancing)
         {
             SwitchAnimation("Sit");
             loveMeter.UpdateLove(0.05f);
@@ -98,7 +100,7 @@ public class DogController : MonoBehaviour {
 
     public void Lay()
     {
-        if (!currentAnimation.Equals("Walk"))
+        if (!currentAnimation.Equals("Walk") && !isDancing)
         {
             SwitchAnimation("Lay");
             loveMeter.UpdateLove(0.05f);
@@ -107,7 +109,7 @@ public class DogController : MonoBehaviour {
     
     public void Stop()
     {
-        if (!currentAnimation.Equals("Walk"))
+        if (!currentAnimation.Equals("Walk") && !isDancing)
         {
             SwitchAnimation("Idle");
         }
@@ -115,7 +117,7 @@ public class DogController : MonoBehaviour {
 
     public void BeginPetting()
     {
-        if (!currentAnimation.Equals("Walk") && !currentAnimation.Equals("Petting"))
+        if (!currentAnimation.Equals("Walk") && !currentAnimation.Equals("Petting") && !isDancing)
         {
             SwitchAnimation("Petting");
             loveMeter.UpdateLove(0.1f);
@@ -132,13 +134,16 @@ public class DogController : MonoBehaviour {
 
     public void Navigate(Vector3 position)
     {
-        SwitchAnimation("Walk");
-        agent.SetDestination(position);
+        if (!isDancing)
+        {
+            SwitchAnimation("Walk");
+            agent.SetDestination(position);
+        }
     }
 
     public void BeginFetch(GameObject fetchableObject)
     {
-        if (!this.isFetching)
+        if (!this.isFetching && !isDancing)
         {
             this.isFetching = true;
             SwitchAnimation("Walk");
@@ -166,6 +171,8 @@ public class DogController : MonoBehaviour {
     {
         SwitchAnimation("Jump");
         isDancing = true;
+        agent.updatePosition = false;
+        agent.updateRotation = false;
     }
 
     private void SwitchAnimation(string newAnimation)
