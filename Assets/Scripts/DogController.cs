@@ -134,7 +134,7 @@ public class DogController : MonoBehaviour {
 
     public void Navigate(Vector3 position)
     {
-        if (!isDancing)
+        if (!isDancing && !isFetching)
         {
             SwitchAnimation("Walk");
             agent.SetDestination(position);
