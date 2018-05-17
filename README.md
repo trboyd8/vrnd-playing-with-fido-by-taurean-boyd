@@ -10,8 +10,8 @@ In this experience, the player will get to play with their new dog Fido in their
  - OVR Plugin 1.24.0
 
 ## Videos
- - Video of the experience:
- - Video of the achievements:
+ - Video of the experience: https://youtu.be/FxWnIHxl7u4
+ - Video of the achievements: https://youtu.be/-QYZg2lRIDM
 
 ## Udacity Achievement List
  - Scale
