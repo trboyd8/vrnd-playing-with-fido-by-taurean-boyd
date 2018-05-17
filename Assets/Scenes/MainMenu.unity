@@ -176,8 +176,8 @@ MonoBehaviour:
     Fido is afraid of his new surroundings and your goal is to make him feel welcome.
 
 
-    To do this, you will need to a few tasks like: Feed him, pet him, play fetch,
-    and find his lost toys.'
+    To do this, you will need to do a few tasks like: pet him, play fetch, and issue
+    voice commands.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 808aa8f1ab804104aa7d0c337a6c1481, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 808aa8f1ab804104aa7d0c337a6c1481, type: 2}
@@ -1375,8 +1375,8 @@ MonoBehaviour:
     Once you let go of the trigger,  you will drop the object.
 
 
-    You can also say voice commands to FIDO, like ''speak'', ''sit'', and ''down''.
-    But only once you have earned his trust.'
+    You can also say voice commands to Fido like: ''speak'', ''sit'',  ''dead'', ''lay''
+    and ''''stop''.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 808aa8f1ab804104aa7d0c337a6c1481, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 808aa8f1ab804104aa7d0c337a6c1481, type: 2}
