@@ -32010,6 +32010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3337a3762a7d743bb04c98768cc312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineLength: 1.5
 --- !u!1001 &982582857
 Prefab:
   m_ObjectHideFlags: 0
