@@ -14,6 +14,8 @@ public class DogController : MonoBehaviour {
     private string currentAnimation;
     private bool isFetching;
     private bool isReturning;
+    private bool isDancing;
+    private float spinSpeed;
 
     private float originalStoppingDistance;
 
@@ -26,6 +28,8 @@ public class DogController : MonoBehaviour {
         loveMeter = this.GetComponentInChildren<LoveMeter>();
         currentAnimation = "Idle";
         isFetching = false;
+        isDancing = false;
+        spinSpeed = 50.0f;
         originalStoppingDistance = agent.stoppingDistance;
 
         animationToBoolMapping = new Dictionary<string, string>();
@@ -36,6 +40,7 @@ public class DogController : MonoBehaviour {
         animationToBoolMapping.Add("Walk", "IsWalking");
         animationToBoolMapping.Add("Idle", "IsIdle");
         animationToBoolMapping.Add("Petting", "IsPetting");
+        animationToBoolMapping.Add("Jump", "IsJumping");
     }
 
     void Update()
@@ -55,6 +60,11 @@ public class DogController : MonoBehaviour {
                 isReturning = false;
                 loveMeter.UpdateLove(0.1f);
             }
+        }
+
+        if (isDancing)
+        {
+            transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
         }
     }
 
@@ -150,6 +160,12 @@ public class DogController : MonoBehaviour {
             this.isFetching = false;
             this.isReturning = true;
         }
+    }
+
+    public void Dance()
+    {
+        SwitchAnimation("Jump");
+        isDancing = true;
     }
 
     private void SwitchAnimation(string newAnimation)
