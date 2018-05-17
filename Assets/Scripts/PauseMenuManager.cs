@@ -5,6 +5,7 @@ public class PauseMenuManager : MonoBehaviour {
     public static bool IsGamePaused = false;
     public GameObject PauseMenu;
     public GameObject Player;
+    public GameObject MenuLine;
 
     private void Update()
     {
@@ -26,6 +27,7 @@ public class PauseMenuManager : MonoBehaviour {
         IsGamePaused = false;
         Time.timeScale = 1f;
         PauseMenu.SetActive(false);
+        MenuLine.SetActive(false);
     }
 
     public void Quit()
@@ -41,5 +43,6 @@ public class PauseMenuManager : MonoBehaviour {
         PauseMenu.transform.LookAt(Player.transform.position);
         PauseMenu.transform.Rotate(new Vector3(0, 180, 0));
         PauseMenu.SetActive(true);
+        MenuLine.SetActive(true);
     }
 }

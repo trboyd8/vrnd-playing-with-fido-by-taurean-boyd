@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MenuLineRenderer : MonoBehaviour {
 
@@ -8,12 +6,12 @@ public class MenuLineRenderer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        lineRenderer = this.GetComponentInChildren<LineRenderer>();
+        lineRenderer = this.GetComponent<LineRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         lineRenderer.SetPosition(0, this.transform.position);
-        lineRenderer.SetPosition(1, this.transform.position + this.transform.forward * 3.47f);
+        lineRenderer.SetPosition(1, this.transform.position + this.transform.forward * 1.5f);
 	}
 }
