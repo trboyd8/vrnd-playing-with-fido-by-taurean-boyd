@@ -16,7 +16,7 @@ In this experience, the player will get to play with their new dog Fido in their
 ## Udacity Achievement List
  - Scale
  - Animation
- - Lighting
+ - Video Player
  - Locomotion
  - Physics
  - Gamification
@@ -35,6 +35,7 @@ In this experience, the player will get to play with their new dog Fido in their
  - Dishes Sound Clip by Andriala : http://soundbible.com/592-Doing-The-Dishes.html
  - Lawn Mower by Mike Koenig: http://soundbible.com/3-Lawn-Mower-Cutoff-Sound-.html
  - Particle Effects: https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-109565
+ - Woman on Bed Video Clip: https://videos.pexels.com/videos/woman-sitting-on-the-bed-857881
 
 ## Licenses for Various Assets:
  - https://creativecommons.org/licenses/sampling+/1.0/
