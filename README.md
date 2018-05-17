@@ -4,6 +4,25 @@ The final project for the Udacity VR Nanodegree.
 ## Description
 In this experience, the player will get to play with their new dog Fido in their backyard. The goal is for the player to get Fido to love him/her by interacting with him. The player will be able to do things like: pet Fido, play fetch, and issue voice commands. Once the Fido fully loves the player, there will be a celebration. This experience is supposed to be a joyful experience.
 
+## Platform
+ - Unity 2017.2.0f3
+ - Windows 10 (with dictation enabled)
+ - OVR Plugin 1.24.0
+
+## Videos
+ - Video of the experience:
+ - Video of the achievements:
+
+## Udacity Achievement List
+ - Scale
+ - Animation
+ - Lighting
+ - Locomotion
+ - Physics
+ - Gamification
+ - AI
+ - Speech Recognition
+
 ## Assets Used:
  - Puppy Bark Sound Clip: http://soundbible.com/393-Puppy-Dog-Barking.html
  - Dog Model and Animations: https://assetstore.unity.com/packages/3d/characters/animals/dog-package-71282
