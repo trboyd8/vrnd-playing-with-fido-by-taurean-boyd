@@ -11,7 +11,7 @@ In this experience, the player will get to play with their new dog Fido in their
 
 ## Videos
  - Video of the experience: https://youtu.be/sTN1FCeEyF0
- - Video of the achievements: https://youtu.be/AJ_z2zjyxtE
+ - Video of the achievements: https://youtu.be/mJX_8gKuMwI
 
 ## Udacity Achievement List
  - Scale
